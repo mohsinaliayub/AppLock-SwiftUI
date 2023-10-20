@@ -11,6 +11,7 @@
 		68F2E3F82AE28A0E002A742E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2E3F72AE28A0E002A742E /* ContentView.swift */; };
 		68F2E3FA2AE28A10002A742E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68F2E3F92AE28A10002A742E /* Assets.xcassets */; };
 		68F2E3FD2AE28A10002A742E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68F2E3FC2AE28A10002A742E /* Preview Assets.xcassets */; };
+		68F2E4052AE28A35002A742E /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2E4042AE28A35002A742E /* LockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		68F2E3F72AE28A0E002A742E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		68F2E3F92AE28A10002A742E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68F2E3FC2AE28A10002A742E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		68F2E4042AE28A35002A742E /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		68F2E3F42AE28A0E002A742E /* LockSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				68F2E4032AE28A2E002A742E /* Views */,
 				68F2E3F52AE28A0E002A742E /* LockSwiftUIApp.swift */,
 				68F2E3F72AE28A0E002A742E /* ContentView.swift */,
 				68F2E3F92AE28A10002A742E /* Assets.xcassets */,
@@ -65,6 +68,14 @@
 				68F2E3FC2AE28A10002A742E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		68F2E4032AE28A2E002A742E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68F2E4042AE28A35002A742E /* LockView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			files = (
 				68F2E3F82AE28A0E002A742E /* ContentView.swift in Sources */,
 				68F2E3F62AE28A0E002A742E /* LockSwiftUIApp.swift in Sources */,
+				68F2E4052AE28A35002A742E /* LockView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
