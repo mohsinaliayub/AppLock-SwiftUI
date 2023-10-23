@@ -18,6 +18,8 @@ struct LockView<Content: View>: View {
     
     // State properties
     @State private var pin: String = ""
+    @State private var animateField = false
+    @State private var isUnlocked = false
     
     var body: some View {
         GeometryReader {
@@ -26,7 +28,7 @@ struct LockView<Content: View>: View {
             content
                 .frame(width: size.width, height: size.height)
             
-            if isEnabled {
+            if isEnabled && !isUnlocked {
                 ZStack {
                     Rectangle().ignoresSafeArea()
                     
@@ -37,7 +39,9 @@ struct LockView<Content: View>: View {
                         numberPadPinView()
                     }
                 }
+                .transition(.offset(y: size.height + 100))
             }
+            
         }
     }
     
@@ -49,6 +53,7 @@ struct LockView<Content: View>: View {
                 .font(.title.bold())
                 .frame(maxWidth: .infinity)
             
+            // Add wiggling animation for wrong pin with KeyFrame Animator.
             HStack(spacing: 10) {
                 ForEach(0..<4, id: \.self) { index in
                     RoundedRectangle(cornerRadius: 10)
@@ -66,6 +71,17 @@ struct LockView<Content: View>: View {
                         }
                 }
             }
+            .keyframeAnimator(initialValue: CGFloat.zero, trigger: animateField, content: { content, value in
+                content.offset(x: value)
+            }, keyframes: { _ in
+                KeyframeTrack {
+                    CubicKeyframe(30, duration: 0.07)
+                    CubicKeyframe(-30, duration: 0.07)
+                    CubicKeyframe(20, duration: 0.07)
+                    CubicKeyframe(-20, duration: 0.07)
+                    CubicKeyframe(0, duration: 0.07)
+                }
+            })
             .padding(.top, 16)
             .overlay(alignment: .bottomTrailing) {
                 Button("Forgot pin?", action: forgotPin)
@@ -134,9 +150,16 @@ struct LockView<Content: View>: View {
                     // Validate pin
                     if lockPin == pin {
                         print("Unlocked")
+                        withAnimation(.snappy, completionCriteria: .logicallyComplete) {
+                            isUnlocked = true
+                        } completion: {
+                            // clearing pin
+                            pin = ""
+                        }
                     } else {
                         print("Wrong pin")
                         pin = ""
+                        animateField.toggle()
                     }
                 }
             }
