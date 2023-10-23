@@ -20,6 +20,7 @@ struct LockView<Content: View>: View {
     @State private var pin: String = ""
     @State private var animateField = false
     @State private var isUnlocked = false
+    @State private var noBiometricAccess = false
     
     var body: some View {
         GeometryReader {
@@ -30,15 +31,51 @@ struct LockView<Content: View>: View {
             
             if isEnabled && !isUnlocked {
                 ZStack {
-                    Rectangle().ignoresSafeArea()
+                    Rectangle().fill(.black).ignoresSafeArea()
                     
                     if lockType == .both || lockType == .biometric {
-                        
+                        Group {
+                            if noBiometricAccess {
+                                Text("Enable biometric authentication in Settings to unlock the view.")
+                                    .font(.callout)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.top, 50)
+                            } else {
+                                // Biometric / Pin unlock
+                                VStack {
+                                    VStack(spacing: 6) {
+                                        Image(systemName: "lock")
+                                            .font(.largeTitle)
+                                        
+                                        Text("Tap to Unlock")
+                                            .font(.caption2)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    .frame(width: 100, height: 100)
+                                    .background(.ultraThinMaterial, in: .rect(cornerRadius: 10))
+                                    .contentShape(.rect)
+                                    .onTapGesture {
+                                        
+                                    }
+                                    
+                                    if lockType == .both {
+                                        Text("Enter Pin")
+                                            .frame(width: 100, height: 40)
+                                            .background(.ultraThinMaterial, in: .rect(cornerRadius: 10))
+                                            .contentShape(.rect)
+                                            .onTapGesture {
+                                                
+                                            }
+                                    }
+                                }
+                            }
+                        }
                     } else {
                         // Custom number pad to view lock pin
                         numberPadPinView()
                     }
                 }
+                .environment(\.colorScheme, .dark)
                 .transition(.offset(y: size.height + 100))
             }
             
